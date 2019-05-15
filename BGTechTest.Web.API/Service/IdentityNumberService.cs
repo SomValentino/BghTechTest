@@ -40,12 +40,18 @@ namespace BGTechTest.Web.API.Service
 
         private string ExtractCitizenShipFromIdentityNumber(string idnum)
         {
-            throw new NotImplementedException();
+            int citizenNum = int.Parse(idnum[10].ToString());
+            if (citizenNum == 0)
+                return "SA Citizen";
+            return "Non-SA Citizen";
         }
 
         private string ExtractGenderFromIdentityNumber(string idnum)
         {
-            throw new NotImplementedException();
+            int genderNum = int.Parse(idnum[6].ToString());
+            if (genderNum >= 0 && genderNum <= 4)
+                return "Female";
+            return "Male";
         }
 
         private DateTime ExtractDoBFromIdentityNumber(string idnum)
@@ -66,7 +72,7 @@ namespace BGTechTest.Web.API.Service
             string cYear = yearPrefix + year;
             yearNum = int.Parse(cYear);
             int monthNum = int.Parse(month.TrimStart('0'));
-            int dayNum = int.Parse(month.TrimStart('0'));
+            int dayNum = int.Parse(day.TrimStart('0'));
 
             DateTime DateOfBirth = new DateTime(yearNum, monthNum, dayNum);
             return DateOfBirth;

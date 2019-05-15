@@ -45,11 +45,12 @@ namespace BGTechTest.Web.API.Controllers
                 var idNumbers = identityNumbers.Trim()
                     .Split(new string[] {Environment.NewLine}, StringSplitOptions.None);
                 IdInfo idInfo = _identityNumberService.ExtractIdInformation(idNumbers,_identityNumberValidator);
+                return Ok();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError(e.Message,e);
+                return StatusCode(500);
             }
         }
 
