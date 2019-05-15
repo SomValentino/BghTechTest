@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BGTechTest.Web.API.Data.Repositories;
 using BGTechTest.Web.API.Helpers;
+using BGTechTest.Web.API.Service;
 using BGTechTest.Web.API.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,7 @@ namespace BGTechTest.Web.API
             services.AddScoped<IIdentityNumberValidator, IdentityNumberValidator>();
             services.AddScoped<IDataSerializer, CsvSerializer>();
             services.AddScoped<IDataRepository, Csvrepository>();
+            services.AddScoped<IIdentityNumberService, IdentityNumberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
