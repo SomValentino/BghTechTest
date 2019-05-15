@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BGTechTest.Web.API.Data.Dtos;
 using BGTechTest.Web.API.Data.Models;
 using BGTechTest.Web.API.Data.Repositories;
 using BGTechTest.Web.API.Service;
@@ -36,7 +37,7 @@ namespace BGTechTest.Web.API.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
+        [HttpPost("addids")]
         public async Task<IActionResult> AddIdentityNumber(string identityNumbers)
         {
             try
@@ -44,7 +45,13 @@ namespace BGTechTest.Web.API.Controllers
                 //split identity numbers from request
                 var idNumbers = identityNumbers.Trim()
                     .Split(new string[] {Environment.NewLine}, StringSplitOptions.None);
+                //Get the valid and invalid id information if they exist.
                 IdInfo idInfo = _identityNumberService.ExtractIdInformation(idNumbers,_identityNumberValidator);
+                // Save to data store: In case as a csv file
+                if (idInfo.validIdInfos.Any())
+                    await _dataRepository.Save(idInfo.validIdInfos, FileCsvType.ValidIdFile);
+                if (idInfo.InvalidIdInfos.Any())
+                    await _dataRepository.Save(idInfo.InvalidIdInfos, FileCsvType.InValidIdFile);
                 return Ok();
             }
             catch (Exception e)
@@ -54,6 +61,19 @@ namespace BGTechTest.Web.API.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UploadIdsFromCsv([FromForm] CsvUploadDto csvIdDto)
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         
 
         
