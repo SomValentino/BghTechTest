@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BGTechTest.Web.API.Data.Repositories;
+using BGTechTest.Web.API.Helpers;
+using BGTechTest.Web.API.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +17,13 @@ namespace BGTechTest.Web.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            CurrentEnvironment = environment;
         }
+
+        public IHostingEnvironment CurrentEnvironment { get;}
 
         public IConfiguration Configuration { get; }
 
@@ -25,6 +31,9 @@ namespace BGTechTest.Web.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IIdentityNumberValidator, IdentityNumberValidator>();
+            services.AddScoped<IDataSerializer, CsvSerializer>();
+            services.AddScoped<IDataRepository, Csvrepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +44,8 @@ namespace BGTechTest.Web.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
