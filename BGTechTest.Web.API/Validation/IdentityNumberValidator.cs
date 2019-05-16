@@ -78,7 +78,7 @@ namespace BGTechTest.Web.API.Validation
             } while (multEvens > 0);
 
             int total = sumMultEvens + sumOdds;
-            int controlNum = 10 - (total % 10);
+            int controlNum = (10 - (total % 10))%10;
             int actualControlNum = int.Parse(identityNumber[identityNumber.Length - 1].ToString());
             if (controlNum != actualControlNum)
             {

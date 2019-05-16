@@ -67,6 +67,7 @@ namespace BGTechTest.Web.API.Controllers
         }
 
         [HttpPost]
+        [Route("uploadcsv")]
         public async Task<IActionResult> UploadIdsFromCsv([FromForm] CsvUploadDto csvIdDto)
         {
             try
@@ -101,7 +102,8 @@ namespace BGTechTest.Web.API.Controllers
             }
         }
 
-        [HttpGet("getIds")]
+        [HttpGet()]
+        [Route("getIds")]
         public async Task<IActionResult> GetIds()
         {
             try
