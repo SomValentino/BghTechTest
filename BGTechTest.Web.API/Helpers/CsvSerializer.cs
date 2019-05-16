@@ -25,7 +25,7 @@ namespace BGTechTest.Web.API.Helpers
             return dataType.GetProperties(BindingFlags.Public | BindingFlags.Instance
                                                                   | BindingFlags.GetProperty | BindingFlags.SetProperty);
         }
-        public async Task Serialize<T>(Stream stream, IEnumerable<T> data) where T : class, new()
+        public async Task Serialize<T>(Stream stream, IList<T> data) where T : class, new()
         {
             try
             {
@@ -55,11 +55,11 @@ namespace BGTechTest.Web.API.Helpers
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
-        public async Task<IEnumerable<T>> Deserialize<T>(Stream stream) where T : class, new()
+        public async Task<IList<T>> Deserialize<T>(Stream stream) where T : class, new()
         {
             string[] headers = GetHeaders<T>().Split(',');
             string[] rows;

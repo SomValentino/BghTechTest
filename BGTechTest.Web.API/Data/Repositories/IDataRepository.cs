@@ -8,7 +8,7 @@ namespace BGTechTest.Web.API.Data.Repositories
 {
     public interface IDataRepository
     {
-        Task Save<T>(IEnumerable<T> Data,FileCsvType fileCsvType) where T : class, new();
-        Task<IEnumerable<T>> Read<T>(FileCsvType fileCsvType) where T : class, new();
+        Task Save<T>(IList<T> Data,FileCsvType fileCsvType) where T : class, new();
+        Task<IList<T>> Read<T>(FileCsvType fileCsvType) where T : class, new();
     }
 }

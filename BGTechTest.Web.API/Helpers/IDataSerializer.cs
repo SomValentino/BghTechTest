@@ -9,8 +9,8 @@ namespace BGTechTest.Web.API.Helpers
 {
     public interface IDataSerializer
     {
-        Task Serialize<T>(Stream stream, IEnumerable<T> data) where T : class,new();
-        Task<IEnumerable<T>> Deserialize<T>(Stream stream) where T : class, new();
+        Task Serialize<T>(Stream stream, IList<T> data) where T : class,new();
+        Task<IList<T>> Deserialize<T>(Stream stream) where T : class, new();
         string CsvData { get; }
         
     }

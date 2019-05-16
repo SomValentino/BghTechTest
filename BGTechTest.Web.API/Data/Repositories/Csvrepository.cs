@@ -19,7 +19,7 @@ namespace BGTechTest.Web.API.Data.Repositories
             _dataSerializer = dataSerializer;
             _hostingEnvironment = hostingEnvironment;
         }
-        public async Task Save<T>(IEnumerable<T> Data, FileCsvType fileCsvType) where T : class, new()
+        public async Task Save<T>(IList<T> Data, FileCsvType fileCsvType) where T : class, new()
         {
             string path = GetPath(fileCsvType);
             var fileStream = new FileStream(path,FileMode.Append,FileAccess.Write);
@@ -44,7 +44,7 @@ namespace BGTechTest.Web.API.Data.Repositories
             return path;
         }
 
-        public Task<IEnumerable<T>> Read<T>(FileCsvType fileCsvType) where T : class, new()
+        public Task<IList<T>> Read<T>(FileCsvType fileCsvType) where T : class, new()
         {
             string path = GetPath(fileCsvType);
             var fileStream = new FileStream(path,FileMode.Open,FileAccess.Read);
