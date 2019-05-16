@@ -61,39 +61,6 @@ namespace BGTechTest.WebAPI.Tests.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 870904642489,The identity number contains characters that are not numbers|The Identity number has less than 13 digits
-        ///870904642489001,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
-        ///870904642489,The identity number contains characters that are not numbers|The Identity number has less than 13 digits
-        ///870904642489001,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
-        ///870904642489,The identity numb [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string Csv_InValidIdFile {
-            get {
-                return ResourceManager.GetString("Csv_InValidIdFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 8709046424188,1987/09/04,Non-SA Citizen,Male
-        ///8605065397083,1986/05/06,SA Citizen,Male
-        ///8709046424188,1987/09/04,Non-SA Citizen,Male
-        ///8605065397083,1986/05/06,SA Citizen,Male
-        ///8709046424188,1987/09/04,Non-SA Citizen,Male
-        ///8605065397083,1986/05/06,SA Citizen,Male
-        ///8709046424188,1987/09/04,Non-SA Citizen,Male
-        ///8605065397083,1986/05/06,SA Citizen,Male
-        ///8709046424188,1987/09/04,Non-SA Citizen,Male
-        ///8605065397083,1986/05/06,SA Citizen,Male
-        ///8709046424188,1987/09/04,Non-SA Citizen,Male
-        ///8605065397083,1986/05/06,S [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string Csv_ValidIdFile {
-            get {
-                return ResourceManager.GetString("Csv_ValidIdFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 
         ///8605065397083,1986/05/06,SA Citizen,Male.
         /// </summary>
