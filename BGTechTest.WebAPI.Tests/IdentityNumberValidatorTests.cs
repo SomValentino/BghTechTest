@@ -67,7 +67,7 @@ namespace Tests
         {
             var result = _identityNumberValidator.Validate(identityNumber);
             Assert.That(result.Isvalid,Is.False);
-            Assert.That(result.ErrorMessage,Is.EqualTo($"The invalid control character. Expected: {identityNumber[identityNumber.Length-1]}, but got : {_identityNumberValidator.controlNumber}"));
+            Assert.That(result.ErrorMessage,Is.EqualTo($"The invalid control character. Expected: {identityNumber[identityNumber.Length-1]} but got : {_identityNumberValidator.controlNumber}"));
         }
         [TestCase("8709046424188")]
         [TestCase("8605065397083")]

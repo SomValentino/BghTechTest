@@ -82,7 +82,7 @@ namespace BGTechTest.Web.API.Validation
             int actualControlNum = int.Parse(identityNumber[identityNumber.Length - 1].ToString());
             if (controlNum != actualControlNum)
             {
-                errorMessages.Add($"The invalid control character. Expected: {actualControlNum}, but got : {controlNum}");
+                errorMessages.Add($"The invalid control character. Expected: {actualControlNum} but got : {controlNum}");
             }
                 
             controlNumber = controlNum;

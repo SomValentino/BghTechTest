@@ -53,7 +53,7 @@ namespace BGTechTest.WebAPI.Tests
             var idInfo = _identityNumberService.ExtractIdInformation(idNumbers, _identityNumberValidator);
 
             Assert.That(idInfo.InvalidIdInfos[0].IdentityNumber,Is.EqualTo("0109046424188"));
-            Assert.That(idInfo.InvalidIdInfos[0].ReasonsFailed,Is.EqualTo("The invalid control character. Expected: 8, but got : 9"));
+            Assert.That(idInfo.InvalidIdInfos[0].ReasonsFailed,Is.EqualTo("The invalid control character. Expected: 8 but got : 9"));
             Assert.That(idInfo.validIdInfos.Any(),Is.False);
         }
     }

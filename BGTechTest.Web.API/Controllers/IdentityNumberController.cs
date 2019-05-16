@@ -39,7 +39,8 @@ namespace BGTechTest.Web.API.Controllers
             _logger = logger;
         }
 
-        [HttpPost("addids")]
+        [HttpPost()]
+        [Route("addids")]
         public async Task<IActionResult> AddIdentityNumber(IdsDto idsDto)
         {
             try
