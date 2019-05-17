@@ -44,11 +44,13 @@ namespace BGTechTest.Web.API.Data.Repositories
             return path;
         }
 
-        public Task<IList<T>> Read<T>(FileCsvType fileCsvType) where T : class, new()
+        public async Task<IList<T>> Read<T>(FileCsvType fileCsvType) where T : class, new()
         {
             string path = GetPath(fileCsvType);
+            if(!File.Exists(path))
+                return new List<T>();
             var fileStream = new FileStream(path,FileMode.Open,FileAccess.Read);
-            return _dataSerializer.Deserialize<T>(fileStream);
+            return await _dataSerializer.Deserialize<T>(fileStream);
         }
     }
 }
