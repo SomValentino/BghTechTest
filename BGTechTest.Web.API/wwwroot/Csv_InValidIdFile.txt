@@ -2,3 +2,26 @@
 7801015800187,The invalid control character. Expected: 7 but got : 2
 9401014800183,The invalid control character. Expected: 3 but got : 0
 8101074800186,The invalid control character. Expected: 6 but got : 4
+8605065447083,The invalid control character. Expected: 3 but got : 6
+7801015800107,The invalid control character. Expected: 7 but got : 9
+9401014800143,The invalid control character. Expected: 3 but got : 9
+8101074800186,The invalid control character. Expected: 6 but got : 4
+8605065447083,The invalid control character. Expected: 3 but got : 6
+7801015800107,The invalid control character. Expected: 7 but got : 9
+9401014800143,The invalid control character. Expected: 3 but got : 9
+8101074800186,The invalid control character. Expected: 6 but got : 4
+8605065447083,The invalid control character. Expected: 3 but got : 6
+7801015800107,The invalid control character. Expected: 7 but got : 9
+9401014800143,The invalid control character. Expected: 3 but got : 9
+8101074800186,The invalid control character. Expected: 6 but got : 4
+// clear form data,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
+      this.idNumbersFormGroup.reset();,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
+8605065447083,The invalid control character. Expected: 3 but got : 6
+7801015800107,The invalid control character. Expected: 7 but got : 9
+9401014800143,The invalid control character. Expected: 3 but got : 9
+8101074800186,The invalid control character. Expected: 6 but got : 4
+dsdsadasdsadsa,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
+sdasdsadssddsa,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
+sdsadsadsdsad,The identity number contains characters that are not numbers
+dsdasdsdsdsadasdsa,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
+sdsadsadasdasd,The identity number contains characters that are not numbers|The Identity number has more than 13 digits

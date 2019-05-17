@@ -49,7 +49,7 @@ namespace BGTechTest.Web.API.Controllers
                     return BadRequest("No identity numbers in request");
                 //split identity numbers from request
                 var idNumbers = idsDto.idNumbers.Trim()
-                    .Split(new string[] {Environment.NewLine}, StringSplitOptions.None);
+                    .Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
                 //Get the valid and invalid id information if they exist.
                 IdInfo idInfo = _identityNumberService.ExtractIdInformation(idNumbers,_identityNumberValidator);
                 // Save to data store: In case as a csv file
@@ -83,7 +83,7 @@ namespace BGTechTest.Web.API.Controllers
                     }
                     if (string.IsNullOrWhiteSpace(fileContents))
                         return BadRequest("No identity numbers in upload File");
-                    var idNumbers = fileContents.Trim().Split(new string[] {Environment.NewLine}, StringSplitOptions.None);
+                    var idNumbers = fileContents.Trim().Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
                     var idInfos = _identityNumberService.ExtractIdInformation(idNumbers, _identityNumberValidator);
                     // save valid and invalid ids to csv
                     if (idInfos.validIdInfos.Any())

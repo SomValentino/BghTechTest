@@ -1,0 +1,25 @@
+<br />
+<div class="card">
+  <div class="card-header"><h2>Identity Number Parser</h2></div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-6">
+        <app-home-validId [validIdInfos]="idInfo.validIdInfos"></app-home-validId>
+      </div>
+      <div class="col-lg-6">
+        <app-home-invalidId [invalidIdInfos]="idInfo.invalidIdInfos"></app-home-invalidId>
+      </div>
+    </div>
+    <hr/>
+    <div class="row">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-6">
+        <app-home-input (RefreshIdInfo)="refreshIdInfo($event)"></app-home-input>
+      </div>
+      <div class="col-lg-3">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer"></div>
+</div>

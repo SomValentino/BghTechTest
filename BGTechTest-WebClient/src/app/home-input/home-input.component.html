@@ -1,0 +1,8 @@
+<p style="color: red">Place each identity number in next line to parse multiple ids</p>
+<form [formGroup]="idNumbersFormGroup" (ngSubmit)="onFormSubmit()">
+  <div class="form-group" >
+    <label for="idNumbers">Identity Numbers</label>
+    <textarea class="form-control" id="idNumbers" rows="5" formControlName="idNumbers"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!idNumbersFormGroup.valid">Parse</button>
+</form>

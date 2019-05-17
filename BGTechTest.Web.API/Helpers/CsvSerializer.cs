@@ -69,7 +69,7 @@ namespace BGTechTest.Web.API.Helpers
                 using (var sr = new StreamReader(stream))
                 {
                     rows = (await sr.ReadToEndAsync())
-                        .Trim().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                        .Trim().Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
                 }
             }
             catch (Exception ex)

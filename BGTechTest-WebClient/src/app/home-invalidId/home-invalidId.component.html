@@ -1,0 +1,17 @@
+<h4>Invalid Id Information</h4>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Identity Number</th>
+      <th scope="col">Reasons Failed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let er of invalidIdInfos | paginate: { itemsPerPage: 5, currentPage: page, id:'second' }">
+      <td>{{er.identityNumber}}</td>
+      <td>{{er.reasonsFailed}}</td>
+    </tr>
+  </tbody>
+
+</table>
+<pagination-controls id="second" (pageChange)="page = $event"></pagination-controls>

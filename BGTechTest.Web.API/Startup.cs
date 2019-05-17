@@ -36,6 +36,7 @@ namespace BGTechTest.Web.API
             services.AddScoped<IDataSerializer, CsvSerializer>();
             services.AddScoped<IDataRepository, Csvrepository>();
             services.AddScoped<IIdentityNumberService, IdentityNumberService>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +47,7 @@ namespace BGTechTest.Web.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
