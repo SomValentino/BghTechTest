@@ -1,12 +1,18 @@
 <hr/>
-<p style="color: red">Place each identity number in next line to parse multiple ids</p>
-<form [formGroup]="idNumbersFormGroup" (ngSubmit)="onFormSubmit()">
-  <div class="form-group" >
-    <label for="idNumbers">Identity Numbers</label>
-    <textarea class="form-control" id="idNumbers" rows="5" formControlName="idNumbers"></textarea>
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+      <p style="color: red">Place each identity number in next line to parse multiple ids</p>
+      <form [formGroup]="idNumbersFormGroup" (ngSubmit)="onFormSubmit()">
+          <div class="form-group" >
+            <label for="idNumbers">Identity Numbers</label>
+            <textarea class="form-control" id="idNumbers" rows="5" formControlName="idNumbers"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!idNumbersFormGroup.valid">Parse</button>
+        </form>
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!idNumbersFormGroup.valid">Parse</button>
-</form>
+  <div class="col-lg-3"></div>
+</div>
 <hr/>
 <div class="row">
  
@@ -76,7 +82,7 @@
               Queue progress:
               <div class="progress" style="">
                   <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-              </div>
+              </div><br/>
           </div>
           <button type="button" class="btn btn-success btn-s"
                   (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">

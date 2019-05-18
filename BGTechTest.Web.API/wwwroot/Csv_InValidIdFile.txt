@@ -1,1 +1,10 @@
 .dg.gdgddh,The identity number contains characters that are not numbers
+8605065447083,The invalid control character. Expected: 3 but got : 6
+7801015800107,The invalid control character. Expected: 7 but got : 9
+9401014800143,The invalid control character. Expected: 3 but got : 9
+8101074800186,The invalid control character. Expected: 6 but got : 4
+8605065447083,The invalid control character. Expected: 3 but got : 6
+7801015800107,The invalid control character. Expected: 7 but got : 9
+9401014800143,The invalid control character. Expected: 3 but got : 9
+8101074800186,The invalid control character. Expected: 6 but got : 4
+I think the word discipline has gotten a bad name. People think about it in terms of purnishment I am talking of discipline in terms of foregoing immediate pleasure for the exchange of long term self respect. If you want to be happy you have rob yourself which means you have discipline yourself. The road to sustained happiness is through disciplining your behaviour.,The identity number contains characters that are not numbers|The Identity number has more than 13 digits
