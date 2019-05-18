@@ -41,7 +41,7 @@ namespace BGTechTest.Web.API.Helpers
                         var rawValue = property.GetValue(item);
                         var value = rawValue == null ? string.Empty :
                             rawValue is DateTime ? ((DateTime) rawValue).ToString("yyyy/MM/dd") :
-                            rawValue.ToString();
+                            rawValue.ToString().Replace(",","");
                         values.Add(value);
                     }
                     sb.AppendLine(string.Join(",", values));

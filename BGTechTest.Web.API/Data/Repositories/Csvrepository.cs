@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BGTechTest.Web.API.Data.Models;
 using BGTechTest.Web.API.Helpers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace BGTechTest.Web.API.Data.Repositories
 {
@@ -19,34 +20,34 @@ namespace BGTechTest.Web.API.Data.Repositories
             _dataSerializer = dataSerializer;
             _hostingEnvironment = hostingEnvironment;
         }
-        public async Task Save<T>(IList<T> Data, FileCsvType fileCsvType) where T : class, new()
+        public async Task Save<T>(IList<T> Data) where T : class, new()
         {
-            string path = GetPath(fileCsvType);
+            string path = GetPath<T>();
             var fileStream = new FileStream(path,FileMode.Append,FileAccess.Write);
             await _dataSerializer.Serialize<T>(fileStream, Data);
         }
 
-        private string GetPath(FileCsvType fileCsvType)
+        private string GetPath<T>() where T: class,new()
         {
             string path;
-            switch (fileCsvType)
+            if (typeof(T) == typeof(ValidIDInfo))
             {
-                case FileCsvType.ValidIdFile:
-                    path = Path.Combine(_hostingEnvironment.WebRootPath, @"Csv_ValidIdFile.txt");
-                    break;
-                case FileCsvType.InValidIdFile:
-                    path = Path.Combine(_hostingEnvironment.WebRootPath, @"Csv_InValidIdFile.txt");
-                    break;
-                default:
-                    throw new Exception("File type does not exist");
+                path = Path.Combine(_hostingEnvironment.WebRootPath, @"Csv_ValidIdFile.txt");
             }
-
+            else if (typeof(T) == typeof(InvalidIDInfo))
+            {
+                path = Path.Combine(_hostingEnvironment.WebRootPath, @"Csv_InValidIdFile.txt");
+            }
+            else
+            {
+                throw new Exception("File type does not exist");
+            }
             return path;
         }
 
-        public async Task<IList<T>> Read<T>(FileCsvType fileCsvType) where T : class, new()
+        public async Task<IList<T>> Read<T>() where T : class, new()
         {
-            string path = GetPath(fileCsvType);
+            string path = GetPath<T>();
             if(!File.Exists(path))
                 return new List<T>();
             var fileStream = new FileStream(path,FileMode.Open,FileAccess.Read);

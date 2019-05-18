@@ -43,7 +43,7 @@ namespace BGTechTest.Web.API.Validation
         {
             if (string.IsNullOrEmpty(identityNumber) || string.IsNullOrWhiteSpace(identityNumber))
             {
-                errorReasons.Add("The identity number cannot be null, empty or whitespace");
+                errorReasons.Add("The identity number cannot be null or empty or whitespace");
             }
 
             return errorReasons.Any();

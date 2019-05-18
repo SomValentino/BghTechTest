@@ -1,4 +1,1 @@
-8605065447083,The invalid control character. Expected: 3 but got : 6
-7801015800107,The invalid control character. Expected: 7 but got : 9
-9401014800143,The invalid control character. Expected: 3 but got : 9
-8101074800186,The invalid control character. Expected: 6 but got : 4
+.dg.gdgddh,The identity number contains characters that are not numbers

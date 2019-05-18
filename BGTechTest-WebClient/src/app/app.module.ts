@@ -13,6 +13,7 @@ import { appRoutes } from './route';
 import { HomeValidIdComponent } from './home-validId/home-validId.component';
 import { HomeInvalidIdComponent } from './home-invalidId/home-invalidId.component';
 import { HomeInputComponent } from './home-input/home-input.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
    declarations: [
@@ -30,7 +31,8 @@ import { HomeInputComponent } from './home-input/home-input.component';
       HttpClientModule,
       RouterModule.forRoot(appRoutes),
       NgxPaginationModule,
-      ToastrModule.forRoot()
+      ToastrModule.forRoot(),
+      FileUploadModule
    ],
    providers: [],
    bootstrap: [

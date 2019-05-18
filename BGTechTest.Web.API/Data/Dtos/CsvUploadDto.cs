@@ -13,6 +13,6 @@ namespace BGTechTest.Web.API.Data.Dtos
     {
         [Required]
         [CsvUploadFile("txt",ErrorMessage = "Invalid file format or file too large")]
-        public IFormFile CsvUploadFile { get; set; }
+        public IFormFile File { get; set; }
     }
 }

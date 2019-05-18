@@ -54,15 +54,15 @@ namespace BGTechTest.Web.API.Controllers
                 IdInfo idInfo = _identityNumberService.ExtractIdInformation(idNumbers,_identityNumberValidator);
                 // Save to data store: In case as a csv file
                 if (idInfo.validIdInfos.Any())
-                    await _dataRepository.Save(idInfo.validIdInfos, FileCsvType.ValidIdFile);
+                    await _dataRepository.Save(idInfo.validIdInfos);
                 if (idInfo.InvalidIdInfos.Any())
-                    await _dataRepository.Save(idInfo.InvalidIdInfos, FileCsvType.InValidIdFile);
+                    await _dataRepository.Save(idInfo.InvalidIdInfos);
                 return NoContent();
             }
             catch (Exception e)
             {
                 _logger.LogError(e.Message,e);
-                return StatusCode(500);
+                return StatusCode(500,e.Message);
             }
         }
 
@@ -72,7 +72,7 @@ namespace BGTechTest.Web.API.Controllers
         {
             try
             {
-                var file = csvIdDto.CsvUploadFile;
+                var file = csvIdDto.File;
 
                 if (file.Length > 0)
                 {
@@ -87,9 +87,9 @@ namespace BGTechTest.Web.API.Controllers
                     var idInfos = _identityNumberService.ExtractIdInformation(idNumbers, _identityNumberValidator);
                     // save valid and invalid ids to csv
                     if (idInfos.validIdInfos.Any())
-                        await _dataRepository.Save(idInfos.validIdInfos, FileCsvType.ValidIdFile);
+                        await _dataRepository.Save(idInfos.validIdInfos);
                     if (idInfos.InvalidIdInfos.Any())
-                        await _dataRepository.Save(idInfos.InvalidIdInfos, FileCsvType.InValidIdFile);
+                        await _dataRepository.Save(idInfos.InvalidIdInfos);
                     return NoContent();
                 }
 
@@ -98,7 +98,7 @@ namespace BGTechTest.Web.API.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e.Message, e);
-                return StatusCode(500);
+                return StatusCode(500, e.Message);
             }
         }
 
@@ -108,8 +108,8 @@ namespace BGTechTest.Web.API.Controllers
         {
             try
             {
-                var validIdInfo = await _dataRepository.Read<ValidIDInfo>(FileCsvType.ValidIdFile);
-                var invalidInfo = await _dataRepository.Read<InvalidIDInfo>(FileCsvType.InValidIdFile);
+                var validIdInfo = await _dataRepository.Read<ValidIDInfo>();
+                var invalidInfo = await _dataRepository.Read<InvalidIDInfo>();
                 var idInfo = new IdInfo();
                 // select only distinct Ids
                 idInfo.validIdInfos.AddRange(validIdInfo.GroupBy(x => x.IdentityNumber)
@@ -123,7 +123,7 @@ namespace BGTechTest.Web.API.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e.Message,e);
-                return StatusCode(500);
+                return StatusCode(500, e.Message);
             }
         }
 

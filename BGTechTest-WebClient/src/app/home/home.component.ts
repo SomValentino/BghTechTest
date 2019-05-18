@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ValidIdInfo } from './../models/ValidIdInfo';
 import { Component, OnInit } from '@angular/core';
 import { IdentityNumberServiceService } from '../services/IdentityNumberService.service';
@@ -12,7 +13,7 @@ import { IdInfo } from '../models/IdInfo';
 export class HomeComponent implements OnInit {
 
   idInfo: IdInfo;
-  constructor(private identityNumberService: IdentityNumberServiceService) {
+  constructor(private identityNumberService: IdentityNumberServiceService, private toastr: ToastrService) {
     this.getIdInformation();
   }
   refreshIdInfo(shouldRefresh: boolean) {
@@ -23,6 +24,8 @@ export class HomeComponent implements OnInit {
   getIdInformation() {
     this.identityNumberService.getIdentityNumbers().subscribe((idInfo: IdInfo) => {
       this.idInfo = idInfo;
+    }, error => {
+      this.toastr.error(error.error);
     });
   }
   ngOnInit() {

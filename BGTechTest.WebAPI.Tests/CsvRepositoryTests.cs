@@ -53,28 +53,28 @@ namespace BGTechTest.WebAPI.Tests
         [Test]
         public async Task Save_GivenDataWithValidIdInfo_SavesCsvToValidIdCsvFile()
         {
-            await _dataRepository.Save(_idInfos, FileCsvType.ValidIdFile);
+            await _dataRepository.Save(_idInfos);
             Assert.That(File.Exists("Csv_ValidIdFile.txt"),Is.True);
         }
 
         [Test]
         public async Task Save_GivenDataWithInvalidIdInfo_SaveCsvToInvalidIdCsvFile()
         {
-            await _dataRepository.Save(_invalidIdInfos, FileCsvType.InValidIdFile);
+            await _dataRepository.Save(_invalidIdInfos);
             Assert.That(File.Exists("Csv_InValidIdFile.txt"),Is.True);
         }
 
         [Test]
         public async Task Read_GivenStreamOfValidIdInfo_ReturnsAListValidIdInfo()
         {
-            var result = await _dataRepository.Read<ValidIDInfo>(FileCsvType.ValidIdFile);
+            var result = await _dataRepository.Read<ValidIDInfo>();
             Assert.That(result,Is.Not.Null);
             Assert.That(result.Any(),Is.True);
         }
         [Test]
         public async Task Read_GivenStreamOfInvalidIdInfo_ReturnsAListInvalidIdInfo()
         {
-            var result = await _dataRepository.Read<InvalidIDInfo>(FileCsvType.InValidIdFile);
+            var result = await _dataRepository.Read<InvalidIDInfo>();
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Any(), Is.True);
         }

@@ -52,13 +52,13 @@ namespace BGTechTest.WebAPI.Tests
 
         private void SetUpDataRepository()
         {
-            _dataRepository.Setup(x => x.Read<ValidIDInfo>(It.IsAny<FileCsvType>()))
+            _dataRepository.Setup(x => x.Read<ValidIDInfo>())
                 .Returns(Task.FromResult<IList<ValidIDInfo>>(new List<ValidIDInfo>
                 {
                     new ValidIDInfo("8709046424188", new DateTime(1987, 9, 4), "Non-SA Citizen", "Male"),
                     new ValidIDInfo("8605065397083", new DateTime(1986, 5, 6), "SA Citizen", "Male"),
                 }));
-            _dataRepository.Setup(x => x.Read<InvalidIDInfo>(It.IsAny<FileCsvType>()))
+            _dataRepository.Setup(x => x.Read<InvalidIDInfo>())
                 .Returns(Task.FromResult<IList<InvalidIDInfo>>(new List<InvalidIDInfo>
                 {
                     new InvalidIDInfo("8709046424188", ""),
@@ -73,7 +73,7 @@ namespace BGTechTest.WebAPI.Tests
             var result = await _identityNumberController.AddIdentityNumber(iddto);
 
             _dataRepository.Verify(x => 
-                x.Save(It.IsAny<List<ValidIDInfo>>(),It.IsAny<FileCsvType>()),Times.AtLeastOnce);
+                x.Save(It.IsAny<List<ValidIDInfo>>()),Times.AtLeastOnce);
             Assert.That(result,Is.InstanceOf<NoContentResult>());
         }
 
@@ -84,7 +84,7 @@ namespace BGTechTest.WebAPI.Tests
             var result = await _identityNumberController.AddIdentityNumber(iddto);
 
             _dataRepository.Verify(x =>
-                x.Save(It.IsAny<List<ValidIDInfo>>(), It.IsAny<FileCsvType>()), Times.Never);
+                x.Save(It.IsAny<List<ValidIDInfo>>()), Times.Never);
             Assert.That(result,Is.InstanceOf<BadRequestObjectResult>());
         }
 
@@ -95,12 +95,12 @@ namespace BGTechTest.WebAPI.Tests
             var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes("8605065447083\r\n8605065397083\r\n"));
             _formFile.Setup(x => x.OpenReadStream()).Returns(memoryStream); //stream of data
             _formFile.Setup(x => x.FileName).Returns("ids.csv");// validation for upload file extension
-            var csvUpload = new CsvUploadDto{CsvUploadFile = _formFile.Object};
+            var csvUpload = new CsvUploadDto{File = _formFile.Object};
 
             var result = await _identityNumberController.UploadIdsFromCsv(csvUpload);
 
             _dataRepository.Verify(x =>
-                x.Save(It.IsAny<List<ValidIDInfo>>(), It.IsAny<FileCsvType>()), Times.AtLeastOnce);
+                x.Save(It.IsAny<List<ValidIDInfo>>()), Times.AtLeastOnce);
             Assert.That(result, Is.InstanceOf<NoContentResult>());
         }
 
@@ -111,12 +111,12 @@ namespace BGTechTest.WebAPI.Tests
             var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(""));
             _formFile.Setup(x => x.OpenReadStream()).Returns(memoryStream); //stream of data
             _formFile.Setup(x => x.FileName).Returns("ids.csv");
-            var csvUpload = new CsvUploadDto { CsvUploadFile = _formFile.Object };
+            var csvUpload = new CsvUploadDto { File = _formFile.Object };
 
             var result = await _identityNumberController.UploadIdsFromCsv(csvUpload);
 
             _dataRepository.Verify(x =>
-                x.Save(It.IsAny<List<ValidIDInfo>>(), It.IsAny<FileCsvType>()), Times.Never);
+                x.Save(It.IsAny<List<ValidIDInfo>>()), Times.Never);
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         }
 

@@ -21,7 +21,7 @@ namespace Tests
         {
             var result = _identityNumberValidator.Validate(identityNumber);
             Assert.That(result.Isvalid,Is.False);
-            Assert.That(result.ErrorMessage,Is.EqualTo("The identity number cannot be null, " +
+            Assert.That(result.ErrorMessage,Is.EqualTo("The identity number cannot be null or " +
                                                        "empty or whitespace"));
         }
 
