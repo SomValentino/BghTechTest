@@ -10,6 +10,7 @@ using BGTechTest.Web.API.Data.Repositories;
 using BGTechTest.Web.API.Helpers;
 using BGTechTest.WebAPI.Tests.Helpers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -20,6 +21,7 @@ namespace BGTechTest.WebAPI.Tests
     public class CsvRepositoryTests
     {
         private Mock<IHostingEnvironment> _hostingEnvironmentMock;
+        private IConfiguration _configuration;
         private IDataSerializer _dataSerializer;
         private IDataRepository _dataRepository;
         private List<ValidIDInfo> _idInfos;
@@ -31,9 +33,10 @@ namespace BGTechTest.WebAPI.Tests
             Assembly asm = Assembly.GetExecutingAssembly();
             string path = System.IO.Path.GetDirectoryName(asm.Location);
             _hostingEnvironmentMock = new Mock<IHostingEnvironment>();
+            _configuration = ConfigurationSetup.SetUpConfiguration();
             _hostingEnvironmentMock.Setup(c => c.WebRootPath).Returns(() => path);
             _dataSerializer = new TestDataSerializer();
-            _dataRepository = new TestCsvRepository(_dataSerializer,_hostingEnvironmentMock.Object);
+            _dataRepository = new TestCsvRepository(_dataSerializer,_hostingEnvironmentMock.Object,_configuration);
             _idInfos = new List<ValidIDInfo>
             {
                 new ValidIDInfo("8709046424188",new DateTime(1987,9,4),"Non-SA Citizen","Male"),

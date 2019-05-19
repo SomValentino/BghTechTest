@@ -114,10 +114,10 @@ namespace BGTechTest.Web.API.Controllers
                 // select only distinct Ids
                 idInfo.validIdInfos.AddRange(validIdInfo.GroupBy(x => x.IdentityNumber)
                     .Select(x => new ValidIDInfo(x.First().IdentityNumber,x.First().BirthDate,
-                        x.First().Gender,x.First().Cizitenship)));
+                        x.First().Gender,x.First().Cizitenship)).Reverse());
                 idInfo.InvalidIdInfos.AddRange(invalidInfo.GroupBy(x => x.IdentityNumber)
                     .Select(x => new InvalidIDInfo(x.First().IdentityNumber,
-                        x.First().ReasonsFailed)));
+                        x.First().ReasonsFailed)).Reverse());
                 return Ok(idInfo);
             }
             catch (Exception e)

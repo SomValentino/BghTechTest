@@ -1,5 +1,6 @@
 using BGTechTest.Web.API.Validation;
 using BGTechTest.WebAPI.Tests.Helpers;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 
 namespace Tests
@@ -8,10 +9,12 @@ namespace Tests
     public class IdentityNumberValidatorTests
     {
         private IIdentityNumberValidator _identityNumberValidator;
+        private IConfiguration _configuration;
         [SetUp]
         public void Setup()
         {
-            _identityNumberValidator = new TestIdentityNumberValidator();
+            _configuration = ConfigurationSetup.SetUpConfiguration();
+            _identityNumberValidator = new TestIdentityNumberValidator(new TestIdentityNumberService(_configuration));
         }
 
         [TestCase(null)]

@@ -4,11 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using BGTechTest.Web.API.Data.Models;
 using BGTechTest.Web.API.Validation;
+using Microsoft.Extensions.Configuration;
 
 namespace BGTechTest.Web.API.Service
 {
     public class IdentityNumberService : IIdentityNumberService
     {
+        private readonly IConfiguration _configuration;
+
+        public IdentityNumberService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public IdInfo ExtractIdInformation(string[] idNumbers,IIdentityNumberValidator identityNumberValidator)
         {
             var idInfo = new IdInfo();
@@ -42,19 +49,19 @@ namespace BGTechTest.Web.API.Service
         {
             int citizenNum = int.Parse(idnum[10].ToString());
             if (citizenNum == 0)
-                return "SA Citizen";
-            return "Non-SA Citizen";
+                return _configuration.GetSection("AppConfig:SACitizen").Value;
+            return _configuration.GetSection("AppConfig:OtherCitizen").Value;
         }
 
         private string ExtractGenderFromIdentityNumber(string idnum)
         {
             int genderNum = int.Parse(idnum[6].ToString());
             if (genderNum >= 0 && genderNum <= 4)
-                return "Female";
-            return "Male";
+                return _configuration.GetSection("AppConfig:Female").Value;
+            return _configuration.GetSection("AppConfig:Male").Value;
         }
 
-        private DateTime ExtractDoBFromIdentityNumber(string idnum)
+        public DateTime ExtractDoBFromIdentityNumber(string idnum)
         {
             // the first six numbers of a valid id represents the Date of birth
             string DOB = idnum.Substring(0, 6);

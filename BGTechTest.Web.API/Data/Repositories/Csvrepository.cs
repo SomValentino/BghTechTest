@@ -7,18 +7,22 @@ using BGTechTest.Web.API.Data.Models;
 using BGTechTest.Web.API.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Extensions.Configuration;
 
 namespace BGTechTest.Web.API.Data.Repositories
 {
-    public class Csvrepository : IDataRepository
+    public class CsvRepository : IDataRepository
     {
         private readonly IDataSerializer _dataSerializer;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IConfiguration _configuration;
 
-        public Csvrepository(IDataSerializer dataSerializer,IHostingEnvironment hostingEnvironment)
+        public CsvRepository(IDataSerializer dataSerializer,IHostingEnvironment hostingEnvironment,
+            IConfiguration configuration)
         {
             _dataSerializer = dataSerializer;
             _hostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
         }
         public async Task Save<T>(IList<T> Data) where T : class, new()
         {
@@ -32,11 +36,11 @@ namespace BGTechTest.Web.API.Data.Repositories
             string path;
             if (typeof(T) == typeof(ValidIDInfo))
             {
-                path = Path.Combine(_hostingEnvironment.WebRootPath, @"Csv_ValidIdFile.txt");
+                path = Path.Combine(_hostingEnvironment.WebRootPath, _configuration.GetSection("AppConfig:ValidIdOutputFile").Value);
             }
             else if (typeof(T) == typeof(InvalidIDInfo))
             {
-                path = Path.Combine(_hostingEnvironment.WebRootPath, @"Csv_InValidIdFile.txt");
+                path = Path.Combine(_hostingEnvironment.WebRootPath, _configuration.GetSection("AppConfig:InvalidIdOutputFile").Value);
             }
             else
             {

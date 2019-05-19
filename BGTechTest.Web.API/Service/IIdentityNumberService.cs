@@ -10,5 +10,6 @@ namespace BGTechTest.Web.API.Service
     public interface IIdentityNumberService
     {
         IdInfo ExtractIdInformation(string[] idNumbers, IIdentityNumberValidator identityNumberValidator);
+        DateTime ExtractDoBFromIdentityNumber(string idnum);
     }
 }

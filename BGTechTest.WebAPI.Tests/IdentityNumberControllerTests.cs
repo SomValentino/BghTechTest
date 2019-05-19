@@ -14,6 +14,7 @@ using BGTechTest.WebAPI.Tests.Resources;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NLog.Web.LayoutRenderers;
@@ -30,6 +31,7 @@ namespace BGTechTest.WebAPI.Tests
         private Mock<IHostingEnvironment> _hostingEnvironment;
         private Mock<IFormFile> _formFile;
         private Mock<ILogger<IdentityNumberController>> _logger;
+        private IConfiguration _configuration;
         private IIdentityNumberService _identityNumberService;
         private IIdentityNumberValidator _identityNumberValidator;
         private IdentityNumberController _identityNumberController;
@@ -43,8 +45,10 @@ namespace BGTechTest.WebAPI.Tests
             _hostingEnvironment = new Mock<IHostingEnvironment>();
             _formFile = new Mock<IFormFile>();
             _logger = new Mock<ILogger<IdentityNumberController>>();
-            _identityNumberValidator = new TestIdentityNumberValidator();
-            _identityNumberService = new TestIdentityNumberService();
+            _configuration = ConfigurationSetup.SetUpConfiguration();
+            
+            _identityNumberService = new TestIdentityNumberService(_configuration);
+            _identityNumberValidator = new TestIdentityNumberValidator(_identityNumberService);
             _identityNumberController = new IdentityNumberController(_dataRepository.Object,_identityNumberValidator,
                 _identityNumberService,_hostingEnvironment.Object,_logger.Object);
             SetUpDataRepository();

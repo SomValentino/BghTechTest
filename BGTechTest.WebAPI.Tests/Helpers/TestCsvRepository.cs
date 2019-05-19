@@ -4,12 +4,14 @@ using System.Text;
 using BGTechTest.Web.API.Data.Repositories;
 using BGTechTest.Web.API.Helpers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace BGTechTest.WebAPI.Tests.Helpers
 {
-    public class TestCsvRepository : Csvrepository
+    public class TestCsvRepository : CsvRepository
     {
-        public TestCsvRepository(IDataSerializer dataSerializer, IHostingEnvironment hostingEnvironment) : base(dataSerializer, hostingEnvironment)
+        public TestCsvRepository(IDataSerializer dataSerializer, IHostingEnvironment hostingEnvironment,IConfiguration configuration) : 
+            base(dataSerializer, hostingEnvironment,configuration)
         {
         }
     }

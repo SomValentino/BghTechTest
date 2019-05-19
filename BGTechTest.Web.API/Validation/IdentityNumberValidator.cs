@@ -4,13 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using BGTechTest.Web.API.Service;
 
 namespace BGTechTest.Web.API.Validation
 {
 
     public class IdentityNumberValidator : IIdentityNumberValidator
     {
+        private readonly IIdentityNumberService _identityNumberService;
         public int controlNumber { get; private set; }
+
+        public IdentityNumberValidator(IIdentityNumberService identityNumberService)
+        {
+            _identityNumberService = identityNumberService;
+        }
         public IdentityNumberValidationResult Validate(string identityNumber)
         {
             List<string> errorReasons = new List<string>();
@@ -29,9 +36,11 @@ namespace BGTechTest.Web.API.Validation
                 result.ErrorMessage = string.Join("|", errorReasons);
                 return result;
             }
+            // validate date of birth
+            ValidateDOB(identityNumber, errorReasons);
             // calculate control character
             ValidateControlCharacter(identityNumber, errorReasons);
-
+            
             return new IdentityNumberValidationResult
             {
                 Isvalid = !errorReasons.Any(),
@@ -39,6 +48,18 @@ namespace BGTechTest.Web.API.Validation
             };
         }
 
+        private void ValidateDOB(string IdentityNumber, List<string> errorReasons)
+        {
+            try
+            {
+                var Dob =_identityNumberService.ExtractDoBFromIdentityNumber(IdentityNumber);
+            }
+            catch (Exception e)
+            {
+                // if we get here a valid date of birth was not parsed
+                errorReasons.Add(e.Message);
+            }
+        }
         private bool NullAndWhiteSpaceCheck(string identityNumber, List<string> errorReasons)
         {
             if (string.IsNullOrEmpty(identityNumber) || string.IsNullOrWhiteSpace(identityNumber))

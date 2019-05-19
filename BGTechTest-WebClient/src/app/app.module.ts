@@ -14,6 +14,7 @@ import { HomeValidIdComponent } from './home-validId/home-validId.component';
 import { HomeInvalidIdComponent } from './home-invalidId/home-invalidId.component';
 import { HomeInputComponent } from './home-input/home-input.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
    declarations: [
@@ -32,7 +33,8 @@ import { FileUploadModule } from 'ng2-file-upload';
       RouterModule.forRoot(appRoutes),
       NgxPaginationModule,
       ToastrModule.forRoot(),
-      FileUploadModule
+      FileUploadModule,
+      AngularFontAwesomeModule
    ],
    providers: [],
    bootstrap: [

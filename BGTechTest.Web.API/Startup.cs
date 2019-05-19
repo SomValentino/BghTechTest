@@ -34,7 +34,7 @@ namespace BGTechTest.Web.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IIdentityNumberValidator, IdentityNumberValidator>();
             services.AddScoped<IDataSerializer, CsvSerializer>();
-            services.AddScoped<IDataRepository, Csvrepository>();
+            services.AddScoped<IDataRepository, CsvRepository>();
             services.AddScoped<IIdentityNumberService, IdentityNumberService>();
             services.AddCors();
         }
